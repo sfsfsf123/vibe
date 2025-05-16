@@ -5,10 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Donate A Meal</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="dark-theme.css" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex flex-col items-center justify-center py-10 px-4">
+  <!-- Navigation Bar -->
+  <nav class="w-full max-w-2xl mx-auto flex justify-between items-center px-6 py-4 mb-6 bg-gray-900/80 border-b border-gray-700 rounded-t-3xl shadow-lg sticky top-0 z-20">
+    <div class="text-2xl font-extrabold text-pink-200 tracking-tight">Donate A Meal</div>
+    <ul class="flex gap-6 text-yellow-200 font-semibold text-lg">
+      <li><a href="#home" class="hover:text-pink-300 transition-colors">Home</a></li>
+      <li><a href="#about" class="hover:text-pink-300 transition-colors">About</a></li>
+      <li><a href="#donate" class="hover:text-pink-300 transition-colors">Donate</a></li>
+      <li><a href="#contact" class="hover:text-pink-300 transition-colors">Contact</a></li>
+    </ul>
+  </nav>
   <div class="w-full max-w-2xl bg-gray-800/95 rounded-3xl shadow-2xl px-8 py-10 flex flex-col items-center border border-gray-700 relative overflow-hidden">
+    <!-- Banner header image and text -->
+    <div class="w-full flex flex-col items-center mb-8">
+      <div class="text-2xl sm:text-3xl font-bold text-pink-200 text-center tracking-wide drop-shadow-lg">GIVING IS BLESSING</div>
+    </div>
     <div class="absolute top-5 left-5 text-pink-300 w-9 h-9 animate-pulse opacity-70">
       <i data-lucide="sparkles"></i>
     </div>
@@ -37,23 +52,99 @@
         <i data-lucide="heart-handshake" class="w-6 h-6"></i> Learn More
       </button>
     </div>
+    <!-- Carousel for donor/recipient stories -->
     <div class="w-full max-w-lg mt-10 mb-2">
       <div class="font-bold text-yellow-300 text-center mb-4">Stories of Impact</div>
-      <div class="flex flex-col gap-4">
-        <div class="bg-gray-700 border-l-4 border-yellow-500 rounded-xl p-4 shadow-sm">
+      <div id="carousel" class="relative overflow-hidden rounded-xl shadow-lg bg-gray-700 border-l-4 border-yellow-500">
+        <div class="carousel-slide p-4 transition-opacity duration-700 opacity-100" style="display: block;">
           <div class="italic text-gray-200 mb-1">“Giving just one meal makes me feel like I've truly brightened someone's day. The updates and thank-yous are heartwarming!”</div>
           <div class="font-semibold text-pink-200 text-sm text-right">— Jasmine, Donor</div>
         </div>
-        <div class="bg-gray-700 border-l-4 border-yellow-500 rounded-xl p-4 shadow-sm">
+        <div class="carousel-slide p-4 transition-opacity duration-700 opacity-0 absolute top-0 left-0 w-full h-full" style="display: none;">
           <div class="italic text-gray-200 mb-1">“I can't cook anymore, so these meals are a blessing. Thank you for remembering us seniors!”</div>
           <div class="font-semibold text-pink-200 text-sm text-right">— Mr. Tan, Recipient</div>
         </div>
+        <!-- Add more slides as needed -->
+        <button id="prevBtn" class="absolute left-2 top-1/2 -translate-y-1/2 bg-gray-900/80 text-yellow-300 rounded-full p-2 hover:bg-pink-700 transition-colors z-10"><i data-lucide="chevron-left"></i></button>
+        <button id="nextBtn" class="absolute right-2 top-1/2 -translate-y-1/2 bg-gray-900/80 text-yellow-300 rounded-full p-2 hover:bg-pink-700 transition-colors z-10"><i data-lucide="chevron-right"></i></button>
       </div>
     </div>
+    <script>
+      // Simple JS carousel for donor/recipient stories
+      const slides = document.querySelectorAll('.carousel-slide');
+      let currentSlide = 0;
+      function showSlide(idx) {
+        slides.forEach((slide, i) => {
+          slide.style.display = i === idx ? 'block' : 'none';
+          slide.style.opacity = i === idx ? '1' : '0';
+        });
+      }
+      document.getElementById('prevBtn').onclick = () => {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+      };
+      document.getElementById('nextBtn').onclick = () => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+      };
+      showSlide(currentSlide);
+    </script>
+    <!-- Add more icons for warmth and accessibility -->
+    <div class="flex gap-4 justify-center mb-8">
+      <i data-lucide="heart" aria-label="Heart icon" class="w-8 h-8 text-pink-400" title="Heart"></i>
+      <i data-lucide="sun" aria-label="Sun icon" class="w-8 h-8 text-yellow-300" title="Sun"></i>
+      <i data-lucide="users" aria-label="Users icon" class="w-8 h-8 text-blue-300" title="Community"></i>
+    </div>
     <div class="w-full flex flex-row justify-center items-center gap-6 mt-6 mb-4 opacity-80">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="Partner 1" class="h-8 w-auto" />
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React logo, partner organization" class="h-8 w-auto" />
       <!-- Add more logos as needed -->
     </div>
+    <!-- Testimonials Section -->
+    <section class="w-full max-w-2xl mx-auto mt-12 mb-8">
+      <h3 class="text-3xl font-bold text-pink-200 text-center mb-8 drop-shadow">Testimonials</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <div class="flex flex-col items-center bg-gray-700 rounded-2xl p-6 shadow-lg border border-yellow-700">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Jasmine, Donor" class="w-20 h-20 rounded-full border-4 border-pink-300 mb-3 shadow" />
+          <div class="italic text-gray-200 mb-2 text-center">“Giving just one meal makes me feel like I've truly brightened someone's day. The updates and thank-yous are heartwarming!”</div>
+          <div class="font-semibold text-pink-200 text-sm text-center">— Jasmine, Donor</div>
+        </div>
+        <div class="flex flex-col items-center bg-gray-700 rounded-2xl p-6 shadow-lg border border-yellow-700">
+          <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Mr. Tan, Recipient" class="w-20 h-20 rounded-full border-4 border-yellow-400 mb-3 shadow" />
+          <div class="italic text-gray-200 mb-2 text-center">“I can't cook anymore, so these meals are a blessing. Thank you for remembering us seniors!”</div>
+          <div class="font-semibold text-yellow-200 text-sm text-center">— Mr. Tan, Recipient</div>
+        </div>
+        <div class="flex flex-col items-center bg-gray-700 rounded-2xl p-6 shadow-lg border border-blue-400">
+          <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Priya, Volunteer" class="w-20 h-20 rounded-full border-4 border-blue-300 mb-3 shadow" />
+          <div class="italic text-gray-200 mb-2 text-center">“Volunteering to deliver meals has connected me with so many wonderful people. The smiles I see are priceless.”</div>
+          <div class="font-semibold text-blue-200 text-sm text-center">— Priya, Volunteer</div>
+        </div>
+        <div class="flex flex-col items-center bg-gray-700 rounded-2xl p-6 shadow-lg border border-green-400">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Mr. Lee, Recipient" class="w-20 h-20 rounded-full border-4 border-green-300 mb-3 shadow" />
+          <div class="italic text-gray-200 mb-2 text-center">“The meals are delicious and the volunteers are so kind. I feel cared for and less alone.”</div>
+          <div class="font-semibold text-green-200 text-sm text-center">— Mr. Lee, Recipient</div>
+        </div>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer class="w-full max-w-2xl mx-auto mt-10 px-6 py-6 bg-gray-900/90 border-t border-gray-700 rounded-b-3xl shadow-lg flex flex-col sm:flex-row justify-between items-center gap-4 text-yellow-200 text-sm">
+      <div class="flex flex-col items-center sm:items-start">
+        <div class="font-bold text-pink-200 mb-1">Contact Us</div>
+        <div>Email: <a href="mailto:info@donateameal.org" class="underline hover:text-pink-300">info@donateameal.org</a></div>
+        <div>Phone: <a href="tel:+1234567890" class="underline hover:text-pink-300">+1 (234) 567-890</a></div>
+      </div>
+      <div class="flex flex-col items-center">
+        <div class="font-bold text-pink-200 mb-1">Follow Us</div>
+        <div class="flex gap-4">
+          <a href="#" aria-label="Twitter" class="hover:text-pink-300"><i data-lucide="twitter"></i></a>
+          <a href="#" aria-label="Facebook" class="hover:text-pink-300"><i data-lucide="facebook"></i></a>
+          <a href="#" aria-label="Instagram" class="hover:text-pink-300"><i data-lucide="instagram"></i></a>
+        </div>
+      </div>
+      <div class="text-center sm:text-right mt-4 sm:mt-0">
+        <div>&copy; 2025 Donate A Meal</div>
+        <div>All rights reserved.</div>
+      </div>
+    </footer>
   </div>
 </body>
 </html>
